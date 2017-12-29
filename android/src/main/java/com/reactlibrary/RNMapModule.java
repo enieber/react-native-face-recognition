@@ -50,39 +50,6 @@ public class RNMapModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void detect(String encondedImage, Promise promise) {
-    byte[] base64Image = Base64.decode(encondedImage, Base64.DEFAULT);
-    Bitmap bitmap = BitmapFactory.decodeByteArray(base64Image, 0, base64Image.length);
-
-    FaceDetector detector = new FaceDetector.Builder(this.reactContext)
-        .setTrackingEnabled(false)
-        .setClassificationType(FaceDetector.ALL_CLASSIFICATIONS)
-        .build();
-    Frame frame = new Frame.Builder().setBitmap(bitmap).build();
-
-    SparseArray<Face> faces = detector.detect(frame);
-    WritableMap faceMap = Arguments.createMap();
-
-    if(faces.size() == 1){
-      for (int i = 0; i < faces.size(); i++) {
-        Face thisFace = faces.valueAt(i);
-        int eyeState = this.getStateEye(thisFace);
-
-        faceMap.putInt("x", (int) thisFace.getPosition().x);
-        faceMap.putInt("y", (int) thisFace.getPosition().y);
-        faceMap.putInt("width", (int) thisFace.getWidth());
-        faceMap.putInt("height", (int) thisFace.getHeight());
-        faceMap.putDouble("leftEyeOpen", thisFace.getIsLeftEyeOpenProbability());
-        faceMap.putDouble("rightEyeOpen", thisFace.getIsRightEyeOpenProbability());
-        faceMap.putDouble("smiling", thisFace.getIsSmilingProbability());
-        faceMap.putInt("eyeStatus", eyeState);
-
-        detector.release();
-        promise.resolve(faceMap);
-      }
-    } else {
-      detector.release();
-      promise.reject("FACE_NOT_FOUND");
-    }
+  public void showMap(Location myLocation, List<GeoPoint> ponts) {
   }
 }

@@ -1,3 +1,3 @@
-import RNFaceRecognition from './RNFaceRecognition';
+import RNMap from './RNMap';
 
-export default RNFaceRecognition;
+export default RNMap;

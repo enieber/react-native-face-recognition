@@ -1,11 +1,11 @@
 {
-  "name": "@entria/react-native-face-recognition",
-  "version": "0.0.3",
-  "description": "Allow facial recognition in React Native applications",
-  "homepage": "https://github.com/entria/react-native-face-recognition#readme",
+  "name": "@enieber/react-native-map",
+  "version": "0.0.1",
+  "description": "Test how to build one react-native component",
+  "homepage": "https://github.com/enieber/react-native-map#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/entria/react-native-face-recognition"
+    "url": "git+https://github.com/enieber/react-native-map"
   },
   "main": "index.js",
   "scripts": {
@@ -17,13 +17,11 @@
   "keywords": [
     "react-native",
     "android",
-    "ios",
-    "face-recognition"
+    "map"
   ],
-  "author": "Entria - The Tech Team",
+  "author": "Enieber Cunha <eniebercunha@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "react-native": "^0.41.2",
-    "react-native-windows": "0.41.0-rc.1"
+    "react-native": "^0.41.2"
   }
 }

@@ -1,4 +1,4 @@
 'use strict';
 import { NativeModules } from 'react-native';
 
-module.exports = NativeModules.RNFaceRecognition;
+module.exports = NativeModules.RNMap;

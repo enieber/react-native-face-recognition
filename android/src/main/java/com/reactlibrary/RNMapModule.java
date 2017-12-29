@@ -33,31 +33,20 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
 
-import com.google.android.gms.vision.face.Face;
-import com.google.android.gms.vision.Detector;
-import com.google.android.gms.vision.Frame;
-import com.google.android.gms.vision.MultiProcessor;
-import com.google.android.gms.vision.Tracker;
-import com.google.android.gms.vision.face.Face;
-import com.google.android.gms.vision.face.FaceDetector;
-
-public class RNFaceRecognitionModule extends ReactContextBaseJavaModule {
+public class RNMapModule extends ReactContextBaseJavaModule {
 
   private final ReactApplicationContext reactContext;
   private static final String REACT_CLASS = "RCTFaceRecognition";
   private boolean faceIsDetected = true;
 
-  public RNFaceRecognitionModule(ReactApplicationContext reactContext) {
+  public RNMapModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
   }
 
-  private static final float EYE_CLOSED_THRESHOLD = 0.30f;
-  private int state = 0;
-
   @Override
   public String getName() {
-    return "RNFaceRecognition";
+    return "RNMap";
   }
 
   @ReactMethod
@@ -96,41 +85,4 @@ public class RNFaceRecognitionModule extends ReactContextBaseJavaModule {
       promise.reject("FACE_NOT_FOUND");
     }
   }
-
-  private int getStateEye(Face face) {
-    float leftEye  = face.getIsLeftEyeOpenProbability();
-    float rightEye = face.getIsRightEyeOpenProbability();
-
-    if ((leftEye == Face.UNCOMPUTED_PROBABILITY) || (rightEye == Face.UNCOMPUTED_PROBABILITY)) {
-      return 3;
-    }
-
-    float eyesValue = Math.min(leftEye, rightEye);
-
-    switch (state) {
-      case 0:
-        if (eyesValue > EYE_CLOSED_THRESHOLD) {
-          state = 1;
-        }
-        break;
-
-      case 1:
-        if (eyesValue < EYE_CLOSED_THRESHOLD) {
-          state = 2;
-        }
-        break;
-
-      case 2:
-        if (eyesValue > EYE_CLOSED_THRESHOLD) {
-          state = 0;
-        }
-        break;
-
-      default:
-        break;
-    }
-
-    return state;
-  }
-
 }

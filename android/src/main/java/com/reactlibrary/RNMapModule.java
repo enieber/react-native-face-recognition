@@ -36,9 +36,7 @@ import com.facebook.react.bridge.Arguments;
 public class RNMapModule extends ReactContextBaseJavaModule {
 
   private final ReactApplicationContext reactContext;
-  private static final String REACT_CLASS = "RCTFaceRecognition";
-  private boolean faceIsDetected = true;
-
+  
   public RNMapModule(ReactApplicationContext reactContext) {
     super(reactContext);
     this.reactContext = reactContext;
@@ -48,8 +46,13 @@ public class RNMapModule extends ReactContextBaseJavaModule {
   public String getName() {
     return "RNMap";
   }
-
+  
   @ReactMethod
   public void showMap(Location myLocation, List<GeoPoint> ponts) {
+    MapFragment mapFragment = new MapFragment();
+    android.app.FragmentManager manager = this.getCurrentActivity().getFragmentManager();
+    android.app.FragmentTransaction transaction = manager.beginTransaction();
+//    transaction.add(R.id.fl_main, mapFragment);
+//    transaction.commit();
   }
 }
